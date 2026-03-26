@@ -272,21 +272,57 @@
     border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     transition: background var(--transition), border-color var(--transition);
   }
-  .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-  .skill-chip {
+  .stack-blocks { display: flex; flex-direction: column; gap: 20px; }
+  .stack-block {
     background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 100px; padding: 10px 20px;
-    display: inline-flex; align-items: center; gap: 8px;
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: background var(--transition), border-color var(--transition), box-shadow 0.2s;
+  }
+  .stack-block:hover { box-shadow: var(--shadow-md); }
+  .stack-block-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    transition: border-color var(--transition);
+  }
+  .stack-block-icon { font-size: 18px; }
+  .stack-block-title {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-3);
+    transition: color var(--transition);
+  }
+  .stack-block-accent {
+    margin-left: auto; width: 28px; height: 3px; border-radius: 3px;
+  }
+  .stack-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 20px; }
+  .skill-chip {
+    background: var(--bg-2); border: 1px solid var(--border);
+    border-radius: 100px; padding: 7px 16px;
+    display: inline-flex; align-items: center; gap: 7px;
     font-size: 13px; font-weight: 500; color: var(--ink-2);
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s;
-    cursor: default; box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+    cursor: default;
   }
   .skill-chip:hover {
-    border-color: var(--accent); transform: translateY(-3px);
-    box-shadow: 0 6px 20px var(--accent-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px var(--accent-glow);
     color: var(--ink);
   }
-  .skill-chip .icon { font-size: 16px; }
+  .skill-chip .icon { font-size: 15px; }
+
+  /* block accent colors */
+  .block-backend  .stack-block-accent { background: linear-gradient(90deg, #5B6AF0, #8B5CF6); }
+  .block-frontend .stack-block-accent { background: linear-gradient(90deg, #06B6D4, #3B82F6); }
+  .block-db       .stack-block-accent { background: linear-gradient(90deg, #F59E0B, #EF4444); }
+  .block-cloud    .stack-block-accent { background: linear-gradient(90deg, #10B981, #06B6D4); }
+  .block-tools    .stack-block-accent { background: linear-gradient(90deg, #6B7280, #374151); }
+
+  .block-backend  .skill-chip:hover { border-color: #8B5CF6; background: rgba(91,106,240,0.08); }
+  .block-frontend .skill-chip:hover { border-color: #3B82F6; background: rgba(59,130,246,0.08); }
+  .block-db       .skill-chip:hover { border-color: #F59E0B; background: rgba(245,158,11,0.08); }
+  .block-cloud    .skill-chip:hover { border-color: #10B981; background: rgba(16,185,129,0.08); }
+  .block-tools    .skill-chip:hover { border-color: #6B7280; background: rgba(107,114,128,0.08); }
 
   /* ── PROJECTS ── */
   .projects-section { background: var(--bg); transition: background var(--transition); }
@@ -524,21 +560,85 @@
       <p class="section-label">Tecnologías</p>
       <h2 class="section-title">Stack técnico</h2>
     </div>
-    <div class="skills-grid">
-      <div class="skill-chip reveal reveal-delay-1"><span class="icon">🐍</span>Python</div>
-      <div class="skill-chip reveal reveal-delay-1"><span class="icon">⚡</span>FastAPI</div>
-      <div class="skill-chip reveal reveal-delay-2"><span class="icon">⚛️</span>React</div>
-      <div class="skill-chip reveal reveal-delay-2"><span class="icon">🔷</span>TypeScript</div>
-      <div class="skill-chip reveal reveal-delay-2"><span class="icon">▲</span>Next.js</div>
-      <div class="skill-chip reveal reveal-delay-3"><span class="icon">🟢</span>Node.js</div>
-      <div class="skill-chip reveal reveal-delay-3"><span class="icon">🐘</span>PHP / Laravel</div>
-      <div class="skill-chip reveal reveal-delay-3"><span class="icon">🤖</span>Claude AI API</div>
-      <div class="skill-chip reveal reveal-delay-4"><span class="icon">💧</span>Supabase</div>
-      <div class="skill-chip reveal reveal-delay-4"><span class="icon">🗄️</span>PostgreSQL</div>
-      <div class="skill-chip reveal reveal-delay-4"><span class="icon">🐙</span>Git / GitHub</div>
-      <div class="skill-chip reveal reveal-delay-5"><span class="icon">🐳</span>Docker</div>
-      <div class="skill-chip reveal reveal-delay-5"><span class="icon">☁️</span>Vercel / AWS</div>
-      <div class="skill-chip reveal reveal-delay-5"><span class="icon">📱</span>Kotlin Android</div>
+    <div class="stack-blocks">
+
+      <div class="stack-block block-backend reveal reveal-delay-1">
+        <div class="stack-block-header">
+          <span class="stack-block-icon">⚙️</span>
+          <span class="stack-block-title">Backend</span>
+          <div class="stack-block-accent"></div>
+        </div>
+        <div class="stack-chips">
+          <div class="skill-chip"><span class="icon">🐍</span>Python</div>
+          <div class="skill-chip"><span class="icon">⚡</span>FastAPI</div>
+          <div class="skill-chip"><span class="icon">🐘</span>PHP</div>
+          <div class="skill-chip"><span class="icon">🌿</span>Laravel</div>
+          <div class="skill-chip"><span class="icon">🟢</span>Node.js</div>
+          <div class="skill-chip"><span class="icon">🦕</span>Django</div>
+        </div>
+      </div>
+
+      <div class="stack-block block-frontend reveal reveal-delay-2">
+        <div class="stack-block-header">
+          <span class="stack-block-icon">🎨</span>
+          <span class="stack-block-title">Frontend</span>
+          <div class="stack-block-accent"></div>
+        </div>
+        <div class="stack-chips">
+          <div class="skill-chip"><span class="icon">⚛️</span>React</div>
+          <div class="skill-chip"><span class="icon">🔷</span>TypeScript</div>
+          <div class="skill-chip"><span class="icon">▲</span>Next.js</div>
+          <div class="skill-chip"><span class="icon">🌐</span>HTML / CSS</div>
+          <div class="skill-chip"><span class="icon">💨</span>Tailwind CSS</div>
+          <div class="skill-chip"><span class="icon">📱</span>Kotlin Android</div>
+        </div>
+      </div>
+
+      <div class="stack-block block-db reveal reveal-delay-3">
+        <div class="stack-block-header">
+          <span class="stack-block-icon">🗄️</span>
+          <span class="stack-block-title">Bases de datos</span>
+          <div class="stack-block-accent"></div>
+        </div>
+        <div class="stack-chips">
+          <div class="skill-chip"><span class="icon">🐘</span>PostgreSQL</div>
+          <div class="skill-chip"><span class="icon">🐬</span>MySQL</div>
+          <div class="skill-chip"><span class="icon">🔶</span>Oracle SQL</div>
+          <div class="skill-chip"><span class="icon">💧</span>Supabase</div>
+          <div class="skill-chip"><span class="icon">🍃</span>MongoDB</div>
+        </div>
+      </div>
+
+      <div class="stack-block block-cloud reveal reveal-delay-4">
+        <div class="stack-block-header">
+          <span class="stack-block-icon">☁️</span>
+          <span class="stack-block-title">Cloud & DevOps</span>
+          <div class="stack-block-accent"></div>
+        </div>
+        <div class="stack-chips">
+          <div class="skill-chip"><span class="icon">▲</span>Vercel</div>
+          <div class="skill-chip"><span class="icon">☁️</span>AWS</div>
+          <div class="skill-chip"><span class="icon">🚀</span>Render</div>
+          <div class="skill-chip"><span class="icon">🐳</span>Docker</div>
+          <div class="skill-chip"><span class="icon">⚙️</span>CI/CD básico</div>
+        </div>
+      </div>
+
+      <div class="stack-block block-tools reveal reveal-delay-5">
+        <div class="stack-block-header">
+          <span class="stack-block-icon">🛠️</span>
+          <span class="stack-block-title">Herramientas & IA</span>
+          <div class="stack-block-accent"></div>
+        </div>
+        <div class="stack-chips">
+          <div class="skill-chip"><span class="icon">🐙</span>Git / GitHub</div>
+          <div class="skill-chip"><span class="icon">🤖</span>Claude AI API</div>
+          <div class="skill-chip"><span class="icon">📮</span>REST APIs</div>
+          <div class="skill-chip"><span class="icon">🔍</span>Postman</div>
+          <div class="skill-chip"><span class="icon">💻</span>VS Code</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
