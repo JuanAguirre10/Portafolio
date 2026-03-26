@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.github.com)",
+      "Bash(gh api:*)",
+      "Bash(git -C /c/Proyectos/Zentrixgrupodeestudios remote -v)",
+      "Bash(git -C /c/Proyectos/sistema-facturas remote -v)",
+      "Bash(git -C /c/Proyectos/boda-juan-alessandra remote -v)",
+      "Bash(git -C /c/Proyectos/consultorio-psicologia remote -v)"
+    ]
+  }
+}
