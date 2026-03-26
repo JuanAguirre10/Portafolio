@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juan Aguirre — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0D0D0D;
+    --ink-2: #3A3A3A;
+    --ink-3: #6B6B6B;
+    --ink-4: #9A9A9A;
+    --surface: #FAFAFA;
+    --surface-2: #F3F3F0;
+    --border: #E4E4DF;
+    --accent: #1A56DB;
+    --accent-light: #EEF3FF;
+    --accent-mid: #4B78E8;
+    --white: #FFFFFF;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; color: var(--ink); letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 0.25rem; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--ink-3);
+    text-decoration: none; padding: 6px 14px; border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--surface-2); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--white);
+    display: flex; align-items: center;
+    padding: 80px 2rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-blob {
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #EEF3FF 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-bg-blob-2 {
+    position: absolute; bottom: -100px; left: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, #F3F3F0 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 960px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 420px; gap: 5rem; align-items: center;
+    position: relative;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 100px; padding: 5px 14px 5px 8px;
+    font-size: 12px; font-weight: 500; color: var(--ink-2);
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #22C55E;
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(44px, 6vw, 68px); line-height: 1.0;
+    color: var(--ink); margin-bottom: 1.5rem;
+    letter-spacing: -2px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent-mid); }
+  .hero-desc {
+    font-size: 16px; color: var(--ink-3); line-height: 1.8;
+    margin-bottom: 2.5rem; max-width: 440px; font-weight: 400;
+  }
+  .hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--ink); color: white;
+    border: none; border-radius: 100px;
+    padding: 12px 26px; font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.2px;
+  }
+  .btn-primary:hover { background: #2D2D2D; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--border); border-radius: 100px;
+    padding: 12px 26px; font-size: 14px; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s, background 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.2px;
+  }
+  .btn-outline:hover { border-color: var(--ink); background: var(--surface); transform: translateY(-2px); }
+
+  /* ─── HERO PHOTO ─── */
+  .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+  .photo-frame {
+    position: relative;
+    width: 340px; height: 400px;
+  }
+  .photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    border-radius: 200px 200px 160px 160px;
+    display: block;
+    position: relative; z-index: 2;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .photo-frame::before {
+    content: '';
+    position: absolute; inset: -6px;
+    border-radius: 206px 206px 166px 166px;
+    background: linear-gradient(160deg, var(--accent-light) 0%, var(--surface-2) 100%);
+    z-index: 1;
+  }
+  .photo-tag {
+    position: absolute;
+    background: white; border: 1px solid var(--border);
+    border-radius: 12px; padding: 8px 14px;
+    font-size: 12px; font-weight: 600; color: var(--ink-2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    white-space: nowrap; z-index: 3;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .pt-1 { top: 30px; right: -24px; }
+  .pt-2 { bottom: 50px; left: -30px; }
+  .pt-3 { bottom: 10px; right: -10px; }
+  .photo-tag span { font-size: 15px; }
+
+  /* ─── SECCIÓN BASE ─── */
+  section { padding: 100px 2rem; }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-header { margin-bottom: 3rem; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    color: var(--accent); text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 4vw, 38px); color: var(--ink);
+    letter-spacing: -1px; line-height: 1.1;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-bg { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .skill-chip {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 100px; padding: 9px 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500; color: var(--ink-2);
+    transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .skill-chip:hover {
+    border-color: var(--ink-2); transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .skill-chip .icon { font-size: 15px; }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--border); }
+  .project-card {
+    background: var(--white);
+    padding: 28px 24px;
+    transition: background 0.2s;
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative;
+  }
+  .project-card:hover { background: var(--surface); }
+  .project-card::after {
+    content: '↗';
+    position: absolute; top: 24px; right: 20px;
+    font-size: 18px; color: var(--border);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .project-card:hover::after { color: var(--ink-3); transform: translate(2px,-2px); }
+  .project-badge {
+    display: inline-flex; align-items: center;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+    padding: 3px 9px; border-radius: 6px; text-transform: uppercase;
+    width: fit-content;
+  }
+  .badge-php { background: #EEF0FF; color: #3A3EA0; }
+  .badge-python { background: #EDFAF0; color: #166534; }
+  .badge-html { background: #FFF7ED; color: #9A3412; }
+  .project-name { font-size: 15px; font-weight: 600; color: var(--ink); padding-right: 28px; line-height: 1.3; }
+  .project-desc { font-size: 13px; color: var(--ink-3); line-height: 1.7; flex: 1; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600; color: var(--ink-3);
+    text-decoration: none; margin-top: 4px;
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--ink); }
+
+  /* ─── ABOUT ─── */
+  .about-bg { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { font-size: 15px; color: var(--ink-2); line-height: 1.85; margin-bottom: 1.25rem; }
+  .stat-row { display: flex; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-item { text-align: left; }
+  .stat-num { font-family: 'Fraunces', serif; font-size: 36px; color: var(--ink); font-weight: 700; letter-spacing: -1px; line-height: 1; }
+  .stat-lbl { font-size: 12px; color: var(--ink-4); font-weight: 500; margin-top: 4px; }
+  .about-sidebar { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--border); }
+  .about-row {
+    background: var(--white); padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 4px;
+    transition: background 0.2s;
+  }
+  .about-row:hover { background: var(--surface); }
+  .about-row-title { font-size: 13px; font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .about-row-sub { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; }
+
+  /* ─── CONTACT ─── */
+  .contact-bg { background: var(--ink); }
+  .contact-bg .section-label { color: rgba(255,255,255,0.4); }
+  .contact-bg .section-title { color: white; }
+  .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .contact-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 2.5rem; line-height: 1.75; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: white; font-size: 14px; font-weight: 500;
+    text-decoration: none; background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 12px 22px; border-radius: 100px;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px 2rem; text-align: center;
+    font-size: 12px; color: rgba(255,255,255,0.25);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.7s cubic-bezier(.22,.68,0,1.1) both; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.35s; }
+  .hero-visual { animation: fadeUp 0.9s 0.2s cubic-bezier(.22,.68,0,1.1) both; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-visual { order: -1; }
+    .photo-frame { width: 220px; height: 260px; }
+    .about-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1.25rem; }
+    .nav-links a { padding: 6px 10px; font-size: 12px; }
+    section { padding: 70px 1.25rem; }
+    .hero { padding: 80px 1.25rem 2rem; }
+    .hero-inner { text-align: center; }
+    .hero-eyebrow, .hero-actions { justify-content: center; }
+    .hero-desc { margin-left: auto; margin-right: auto; }
+    .photo-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">JA.</div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#projects">Proyectos</a>
+    <a href="#about">Sobre mí</a>
+    <a href="#contact">Contacto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-blob"></div>
+  <div class="hero-bg-blob-2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow"><span class="dot"></span> Disponible para oportunidades</div>
+      <h1>Juan<br><em>Aguirre</em><br>Saavedra</h1>
+      <p class="hero-desc">Construyo soluciones digitales donde la lógica se encuentra con el diseño. Estudiante de Diseño y Desarrollo de Software en Tecsup, con proyectos reales en producción.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">Ver proyectos →</a>
+        <a href="#contact" class="btn-outline">Contactar</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="photo-frame">
+        <img src="foto.jpeg" alt="Juan Aguirre Saavedra">
+        <div class="photo-tag pt-1"><span>⚡</span> Full Stack</div>
+        <div class="photo-tag pt-2"><span>🎓</span> V Ciclo · Tecsup</div>
+        <div class="photo-tag pt-3"><span>🐙</span> 56 repos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-bg" id="skills">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Tecnologías</p>
+      <h2 class="section-title">Stack técnico</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-chip"><span class="icon">🐘</span>PHP / Laravel</div>
+      <div class="skill-chip"><span class="icon">🐍</span>Python</div>
+      <div class="skill-chip"><span class="icon">⚡</span>FastAPI</div>
+      <div class="skill-chip"><span class="icon">🟢</span>Node.js</div>
+      <div class="skill-chip"><span class="icon">⚛️</span>JavaScript</div>
+      <div class="skill-chip"><span class="icon">🗄️</span>Oracle SQL</div>
+      <div class="skill-chip"><span class="icon">💧</span>Supabase</div>
+      <div class="skill-chip"><span class="icon">☁️</span>AWS</div>
+      <div class="skill-chip"><span class="icon">🚀</span>Render</div>
+      <div class="skill-chip"><span class="icon">🐙</span>Git / GitHub</div>
+      <div class="skill-chip"><span class="icon">🌐</span>HTML / CSS</div>
+      <div class="skill-chip"><span class="icon">🐳</span>Docker</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Portafolio</p>
+      <h2 class="section-title">Proyectos destacados</h2>
+    </div>
+    <div class="projects-grid">
+
+      <a href="https://github.com/JuanAguirre10/Zentrix-Gestion" class="project-card" target="_blank" style="text-decoration:none;">
+        <span class="project-badge badge-php">Blade</span>
+        <div class="project-name">Zentrix Gestión</div>
+        <p class="project-desc">Sistema de gestión académica para Zentrix Grupo de Estudios. Proyecto de uso real con Laravel y Blade.</p>
+        <span class="project-link">github.com/JuanAguirre10</span>
+      </a>
+
+      <a href="https://github.com/JuanAguirre10/sistema-oracle-enaho-2022" class="project-card" target="_blank" style="text-decoration:none;">
+        <span class="project-badge badge-php">PHP</span>
+        <div class="project-name">Sistema Oracle ENAHO</div>
+        <p class="project-desc">Laravel con procedimiento MERGE en Oracle usando datos ENAHO 2022 del INEI Perú. Integración de datos gubernamentales reales.</p>
+        <span class="project-link">github.com/JuanAguirre10</span>
+      </a>
+
+      <a href="https://github.com/JuanAguirre10/biblioteca-virtual-laravel-oracle" class="project-card" target="_blank" style="text-decoration:none;">
+        <span class="project-badge badge-php">Blade</span>
+        <div class="project-name">Biblioteca Virtual</div>
+        <p class="project-desc">Aplicación de biblioteca virtual con Laravel y Oracle, con CRUD completo y gestión de usuarios.</p>
+        <span class="project-link">github.com/JuanAguirre10</span>
+      </a>
+
+      <a href="https://github.com/JuanAguirre10/Lab1Django" class="project-card" target="_blank" style="text-decoration:none;">
+        <span class="project-badge badge-python">Python</span>
+        <div class="project-name">Lab Django</div>
+        <p class="project-desc">Proyecto de laboratorio usando Django, explorando el framework web de Python para aplicaciones robustas.</p>
+        <span class="project-link">github.com/JuanAguirre10</span>
+      </a>
+
+      <a href="https://github.com/JuanAguirre10/lab14" class="project-card" target="_blank" style="text-decoration:none;">
+        <span class="project-badge badge-python">Python</span>
+        <div class="project-name">Lab14 Python</div>
+        <p class="project-desc">Laboratorio de Python con ejercicios avanzados de lógica y estructuras de datos.</p>
+        <span class="project-link">github.com/JuanAguirre10</span>
+      </a>
+
+      <a href="https://github.com/JuanAguirre10/Lab02" class="project-card" target="_blank" style="text-decoration:none;">
+        <span class="project-badge badge-html">HTML</span>
+        <div class="project-name">Lab02 HTML</div>
+        <p class="project-desc">Ejercicio de laboratorio en HTML explorando diseño web y estructura semántica de páginas.</p>
+        <span class="project-link">github.com/JuanAguirre10</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="skills-bg" id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <p class="section-label">Sobre mí</p>
+      <h2 class="section-title">¿Quién soy?</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Soy Juan Alexis Aguirre Saavedra, estudiante de V ciclo en Diseño y Desarrollo de Software en Tecsup, Lima.</p>
+        <p>Me apasiona construir software que resuelve problemas reales — desde sistemas académicos hasta integraciones con bases de datos empresariales. Trabajo con tecnologías modernas tanto en backend como en frontend.</p>
+        <p>Con más de 56 repositorios en GitHub, cada proyecto representa un nuevo reto y una oportunidad de aprender algo nuevo.</p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-num">56+</div>
+            <div class="stat-lbl">Repositorios</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">V</div>
+            <div class="stat-lbl">Ciclo Tecsup</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">10+</div>
+            <div class="stat-lbl">Tecnologías</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-sidebar">
+        <div class="about-row">
+          <div class="about-row-title">🎓 Tecsup</div>
+          <div class="about-row-sub">Diseño y Desarrollo de Software · V Ciclo · Lima, Perú</div>
+        </div>
+        <div class="about-row">
+          <div class="about-row-title">💼 Enfoque</div>
+          <div class="about-row-sub">Full Stack — Backend (Laravel, FastAPI, Node.js) + Bases de datos (Oracle, Supabase)</div>
+        </div>
+        <div class="about-row">
+          <div class="about-row-title">☁️ Cloud & DevOps</div>
+          <div class="about-row-sub">Despliegue en Render y AWS. Familiarizado con Docker y CI/CD básico.</div>
+        </div>
+        <div class="about-row">
+          <div class="about-row-title">🌍 Idiomas</div>
+          <div class="about-row-sub">Español (nativo) · Inglés técnico (lectura)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-bg" id="contact">
+  <div class="contact-inner">
+    <p class="section-label">Contacto</p>
+    <h2 class="section-title" style="margin-bottom:1rem;">Trabajemos<br><em style="font-family:'Fraunces',serif;font-style:italic;color:rgba(255,255,255,0.5)">juntos</em></h2>
+    <p class="contact-sub">¿Tienes un proyecto en mente o una oportunidad que quieras compartir? Estoy disponible para prácticas, colaboraciones y proyectos freelance.</p>
+    <div class="contact-links">
+      <a href="mailto:juan.aguirre.s@tecsup.edu.pe" class="contact-link">✉️ juan.aguirre.s@tecsup.edu.pe</a>
+      <a href="https://github.com/JuanAguirre10" class="contact-link" target="_blank">🐙 github.com/JuanAguirre10</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Juan Alexis Aguirre Saavedra · Hecho con código limpio
+</footer>
+
+</body>
+</html>
